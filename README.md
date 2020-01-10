@@ -154,4 +154,4 @@ Cache-Control: no-cache
 ```
 
 # Support
-Have a questions? Contact us "email"
+Have a question? Contact us "email"
