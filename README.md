@@ -6,6 +6,11 @@ If you need to get info about transactions related to some addresses you can do 
 
 Additional functionality is ability to check your address balance (if it is not a script), you can do it by running simple GET http query.
 
+
+##### There is project architecture diagram given below.
+
+![Architecture diagram](./img/2.png)
+
 # How to install
 
 To start lets look at **docker-compose.yaml** file first.
@@ -73,9 +78,8 @@ java -jar ./build/libs/btc-event-loader-0.1.0.jar
 
 
 
- To retrieve any Input/Output transactions related to the specific addresses you should add this address to watch list by submiting simple Post query on our front node url. 
+*  To retrieve any Input/Output transactions related to the specific addresses you should add this address to watch list by submiting simple Post query on our front node url. 
 
-### Example:
 
 ```java
 POST /api/v1/addresses HTTP/1.1
@@ -89,11 +93,10 @@ Cache-Control: no-cache
 }
 ```
 
-To subscribe to our kafka topic: `bitcoin.mainnet.transactions` use any kafka client you want. Than you are ready to receive events. You may submit some BTC from/to address you are tracking to test it.
+* To subscribe to our kafka topic: `bitcoin.mainnet.transactions` use any kafka client you want. Than you are ready to receive events. You may submit some BTC from/to address you are tracking to test it.
 
-To broadcast transaction throw FrontNode you should submit Post query on out front note url. 
+* To broadcast transaction throw FrontNode you should submit Post query on out front note url. 
 
-### Example:
 
 ```java
 POST /api/v1/transactions HTTP/1.1
@@ -107,4 +110,48 @@ Cache-Control: no-cache
 }
 ```
 
-To receive updates about this transaction you should subscribe on the same topic as in previous example: `bitcoin.mainnet.transactions`.
+* To receive updates about this transaction you should subscribe on the same topic as in previous example: `bitcoin.mainnet.transactions`.
+
+* To add on traking multiple addresses by one request you should submit the following http query:
+
+```java
+POST /api/v1/addresses/batch HTTP/1.1
+Host: localhost:8080
+Authorization: K5JK6fdG9clAktrqDvIEgZTbjybgLGgLxPymygFdRxDdSJjSBs9uRDJrxytXnIHZ
+Content-Type: application/json
+Cache-Control: no-cache
+[
+  {
+    "address": "string"
+  }
+]
+```
+
+* To delete address from tracking list you should submit the following http query: 
+
+```java
+DELETE /api/v1/addresses/{address} HTTP/1.1
+Host: localhost:8080
+Authorization: K5JK6fdG9clAktrqDvIEgZTbjybgLGgLxPymygFdRxDdSJjSBs9uRDJrxytXnIHZ
+Content-Type: multipart/form-data
+Cache-Control: no-cache
+```
+
+* To delete multiple addresses you should submit the following http query:
+
+```java
+DELETE /api/v1/addresses HTTP/1.1
+Host: localhost:8080
+Authorization: K5JK6fdG9clAktrqDvIEgZTbjybgLGgLxPymygFdRxDdSJjSBs9uRDJrxytXnIHZ
+Content-Type: multipart/form-data
+Cache-Control: no-cache
+
+[
+  {
+    "address": "string"
+  }
+]
+```
+
+# Support
+Have a questions? Contact us "email"
