@@ -154,4 +154,4 @@ Cache-Control: no-cache
 ```
 
 # Support
-Have a question? Contact us "email"
+Have a question? Contact us frontnode@vareger.com
