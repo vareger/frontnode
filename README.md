@@ -95,7 +95,7 @@ Cache-Control: no-cache
 * To subscribe to FrontNode Kafka topic: `bitcoin.mainnet.transactions` you may use any Kafka client. 
 
 
-# Now you are ready to receive events. You may submit some BTC from/to your address to test it.
+Now you are ready to receive events. You may submit some BTC from/to your address to test it.
 
 
 * To broadcast transaction throw FrontNode, submit Post query on FrontNode url: 
