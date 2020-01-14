@@ -4,7 +4,7 @@
 
 To track any Input/Output transactions and updates related to the specific addresses, register one or multiple addresses in FrontNode by running POST HTTP query and subscribe for Kafka endpoint. If the address will send or receive some transaction, it will trigger event.
 
-Additional you can check address balance (if it is not a script) by running simple GET http query.
+Additionally, you can check address balance (if it is not a script) by running simple GET http query.
 
 
 ##### Below is project architecture diagram.
