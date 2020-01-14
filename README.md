@@ -162,7 +162,7 @@ Content-Type: application/json
 Cache-Control: no-cache
 ```
 
-To check address balance you should submit the following http query (balance service):
+* To check address balance you should submit the following http query (balance service):
 
 ```java
 GET /api/v1/addresses/{address} HTTP/1.1
@@ -171,7 +171,7 @@ Content-Type: application/json
 Cache-Control: no-cache
 ```
 
-To check multiple addresses balances you should submit the following http query (balance service):
+* To check multiple addresses balances you should submit the following http query (balance service):
 
 ```java
 POST /api/v1/addresses/balances HTTP/1.1
