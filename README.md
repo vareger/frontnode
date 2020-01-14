@@ -1,10 +1,10 @@
 # FrontNode
 
-**FrontNode** helps you to receive transaction events and check balance on the Bitcoin P2P network for a specific address in real time.
+**FrontNode** helps you to receive transaction events and check the balance on the Bitcoin P2P network for a specific address in real-time.
 
-To track any Input/Output transactions and updates related to the specific addresses, register one or multiple addresses in FrontNode by running POST HTTP query and subscribe for Kafka endpoint. If the address will send or receive some transaction, it will trigger event.
+To track any Input/Output transactions and updates related to the specific addresses, register one or multiple addresses in FrontNode by running POST HTTP query and subscribe for Kafka endpoint. If the address will send or receive some transaction, it will trigger FrontNode event.
 
-Additionally, you can check address balance (if it is not a script) by running simple GET http query.
+Additionally, you can check address balance (if it is not a script) by running simple GET HTTP query.
 
 
 ##### Below is project architecture diagram.
@@ -15,7 +15,7 @@ Additionally, you can check address balance (if it is not a script) by running s
 
 Start from **docker-compose.yaml** file first.
 
-To save your progress of sync and other data you should set volumes in all servers.
+Set up volume in all servers in order to save your progress and other data.
 
 ### Example:
 **"bitcoind"** service line has: 
@@ -24,7 +24,7 @@ To save your progress of sync and other data you should set volumes in all serve
 # volumes:
 # /host_folder:/root/.bitcoin
 ```
-you should modify it to: 
+modify it to: 
 
 ```
 volumes:
@@ -32,14 +32,14 @@ volumes:
 ```
 ![](./img/1.png)
 
-After volume is set launch FrontNode environment with command:
+After volume is set, launch FrontNode environment:
 
 ```
 docker-compose up
 ```
 
-This command will launch Bitcoin Node, ZooKeeper, Kafka and PostgreSQL. Bitcoin Node and Balance Service will be synchronized, it might take some time.
-Then you need to set up enviroment variables into the prefered OS or IDEA you are going to use to launch FrontNode.
+This command will launch Bitcoin Node, ZooKeeper, Kafka and PostgreSQL. Bitcoin Node and Balance Service synchronization might take some time.
+Then you need to set up enviroment variables into the OS or IDEA you are going to use to launch FrontNode.
 
 ```java
 SERVER_PORT: 8080;						
@@ -78,8 +78,7 @@ java -jar ./build/libs/btc-event-loader-0.1.0.jar
 
 
 
-*  To retrieve any Input/Output transactions related to the specific addresses you should add this address to watch list by submiting simple Post query on FrontNode url. 
-
+*  To retrieve any Input/Output transactions related to the specific addresses, add this address to watch list:
 
 ```java
 POST /api/v1/addresses HTTP/1.1
@@ -96,11 +95,10 @@ Cache-Control: no-cache
 * To subscribe to FrontNode Kafka topic: `bitcoin.mainnet.transactions` you may use any Kafka client. 
 
 
-# Than you are ready to receive events. You may submit some BTC from/to address you are tracking to test it.
+# Now you are ready to receive events. You may submit some BTC from/to your address to test it.
 
 
-* To broadcast transaction throw FrontNode submit Post query on FrontNode url. 
-
+* To broadcast transaction throw FrontNode, submit Post query on FrontNode url: 
 
 ```java
 POST /api/v1/transactions HTTP/1.1
@@ -114,9 +112,11 @@ Cache-Control: no-cache
 }
 ```
 
-* To receive updates about this transaction you should subscribe on the same topic as in previous example: `bitcoin.mainnet.transactions`.
+* To receive updates about this transaction you should subscribe on the same topic as in previous example: 
 
-* To add on traking multiple addresses in one request submit the following HTTP query:
+`bitcoin.mainnet.transactions`
+
+* To add on traking multiple addresses in one request, submit the following HTTP query:
 
 ```java
 POST /api/v1/addresses/batch HTTP/1.1
@@ -131,7 +131,7 @@ Cache-Control: no-cache
 ]
 ```
 
-* To delete address from tracking list submit the following http query: 
+* To delete address from tracking list, submit the following http query: 
 
 ```java
 DELETE /api/v1/addresses/{address} HTTP/1.1
@@ -141,7 +141,7 @@ Content-Type: multipart/form-data
 Cache-Control: no-cache
 ```
 
-* To delete multiple addresses you should submit the following HTTP query:
+* To delete multiple addresses, submit the following HTTP query:
 
 ```java
 DELETE /api/v1/addresses HTTP/1.1
@@ -156,7 +156,7 @@ Cache-Control: no-cache
   }
 ]
 ```
-* To check address exsisting in tracking list submit the following HTTP query:
+* To check address exsisting in tracking list, submit the following HTTP query:
 
 ```java
 GET /api/v1/addresses/{address} HTTP/1.1
@@ -166,7 +166,7 @@ Content-Type: application/json
 Cache-Control: no-cache
 ```
 
-* To check address balance submit the following HTTP query (balance service):
+* To check address balance, submit the following HTTP query (balance service):
 
 ```java
 GET /api/v1/addresses/{address} HTTP/1.1
@@ -175,7 +175,7 @@ Content-Type: application/json
 Cache-Control: no-cache
 ```
 
-* To check multiple addresses balances submit the following HTTP query (balance service):
+* To check multiple addresses balances, submit the following HTTP query (balance service):
 
 ```java
 POST /api/v1/addresses/balances HTTP/1.1
