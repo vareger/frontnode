@@ -152,6 +152,37 @@ Cache-Control: no-cache
   }
 ]
 ```
+* To check address exsisting in tracking list submit the following http query:
+
+```java
+GET /api/v1/addresses/{address} HTTP/1.1
+Host: localhost:8080
+Authorization: K5JK6fdG9clAktrqDvIEgZTbjybgLGgLxPymygFdRxDdSJjSBs9uRDJrxytXnIHZ
+Content-Type: application/json
+Cache-Control: no-cache
+```
+
+To check address balance you should submit the following http query (balance service):
+
+```java
+GET /api/v1/addresses/{address} HTTP/1.1
+Host: localhost:8084
+Content-Type: application/json
+Cache-Control: no-cache
+```
+
+To check multiple addresses balances you should submit the following http query (balance service):
+
+```java
+POST /api/v1/addresses/balances HTTP/1.1
+Host: localhost:8084
+Content-Type: application/json
+Cache-Control: no-cache
+[
+    "{address}",
+    "{address}"
+]
+```
 
 # Support
 Have a question? Contact us frontnode@vareger.com
